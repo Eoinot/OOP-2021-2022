@@ -7,7 +7,10 @@ public class Main
       
 
         Cat ginger = new Cat("Ginger");
-        ginger.Kill(9);
+        do
+        {
+            ginger.Kill();
+        }while (ginger.getNumLives() >= 0);
 
      
 

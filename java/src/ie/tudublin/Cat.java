@@ -2,30 +2,38 @@ package ie.tudublin;
 
 public class Cat extends Animal
 {
+    public Cat(String name) {
+        super(name);
+        this.numLives = 9;
+        //TODO Auto-generated constructor stub
+    }
+
     private int numLives;
-    public int lives(){
+
+    public int getNumLives() {
         return numLives;
     }
 
-    public Cat(String name)
-    {
-        super(name);
-        numLives = 9;
+    public void setNumLives(int numLives) {
+        this.numLives = numLives;
+        
     }
 
-    public void Kill(int newLives)
+   
+
+    public void Kill()
     {
 
-        numLives = newLives;
-        while (numLives > 0)
-        {
+        
             if (numLives > 0)
             {
-                numLives = numLives - 1;
+                
                 System.out.println("Ouch");
-            } 
-        }  
-        System.out.println("Dead"); 
+            } else{
+                System.out.println("Dead");
+            }
+            numLives = numLives - 1;
+      
 
     }   
 }
