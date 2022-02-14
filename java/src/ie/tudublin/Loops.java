@@ -22,12 +22,18 @@ public class Loops extends PApplet
 	Q4 static int e = 450;
 	static int f = 0;
 	static int g = 50;
-	static int h = 50;  */
+	static int h = 50;  
 	
-	static int a = 25;
+	Q5static int a = 25;
 	static int b =25;
 	static int c = 47;
-	static int d = 47; 
+	static int d = 47; */
+
+	static int a = 0;
+	static int b = 0;
+	static int c = 25;
+	static int d = 25; 
+ 
 
 
 
@@ -63,7 +69,7 @@ public class Loops extends PApplet
 		int y = 300;
 		int z = 200; */ 
 
-		int x = 0;
+		int x = 200;
 		int y = 300;
 		int z = 200;
 
@@ -115,6 +121,22 @@ public class Loops extends PApplet
                 fill((255/100) * i * j, 255,255);
                 ellipse(((width/10) * i) + 25,((height/10)*j) + 25,width/10,height/10);
             } */
+			for(int j = 0; j < 10; j++)
+			{
+				x -= 50;
+				fill(x,y,z);
+				rect(a,b,c,d); 
+				noFill();
+				a += 25;
+				x += 50;
+				fill(x,y,z);
+				rect(a,b,c,d);
+				noFill();
+			}
+
+
+
+
 
 			
             
