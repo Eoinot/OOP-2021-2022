@@ -13,7 +13,6 @@ public class LifeBoard {
     {
         board = new boolean[size][size];
         next = new boolean[size][size];
-
         this.size = size;
         this.pa = pa;
         cellSize = pa.width / (float) size;
@@ -30,38 +29,64 @@ public class LifeBoard {
         }
     }
 
-    public void setAlive(int row,int col,boolean alive){
+    public void update()
+    {
+        // If cell is alive
+        // 2 -3 - Survives
+        // if a dead cell has 3 neighbours - comes to life
 
-        if(row >= 0 && row < size &&col >= 0 &&col < size){
+        for(int row = 0 ; row < size ; row ++)
+        {
+            for (int col = 0 ; col < size ; col ++)
+            {
+                int count = countCellsAround(row, col);
 
-            board[row][col] = alive;
-
+                if (isAlive(row, col))
+                {
+                    if (count == 2 || count == 3)
+                    {
+                        next[row][col] = true;
+                    }
+                    else
+                    {
+                        next[row][col] = false;
+                    }
+                }
+                else
+                {
+                    if (count == 3)
+                    {
+                        next[row][col] = true;
+                    }
+                    else
+                    {
+                        next[row][col] = false;
+                    }
+                }
+            }
         }
 
+        boolean[][] temp;
+        temp = board;
+        board = next;
+        next = temp;
     }
 
-    public boolean isAlive(int row, int col){
-
-        if(row >= 0 && row < size &&col >= 0 &&col < size){
-
-            return board[row][col];
-
-        } else{
-
-            return false;
-        }
-    } 
-
-    public int countCellsAround(int row, int col){
+    public int countCellsAround(int row, int col)
+    {
         int count = 0;
-        
-        for (int i = row-1;i<=row + 1;i++){
-            for (int j = col-1;j<=col+1;j++){
 
-                if(!(i == row && j == col)){
-                    if(isAlive(i,j))
+        // Your bit goes here!
+
+        for(int i = row - 1 ; i <= row + 1 ; i ++)
+        {
+            for(int j = col -1 ; j <= col + 1; j ++)
+            {
+                if (! (i == row && j == col))
+                {
+                    if (isAlive(i, j))
                     {
-                        count++;
+                        count ++;
                     }
                 }
             }
@@ -70,40 +95,24 @@ public class LifeBoard {
         return count;
     }
 
-    public void update(){
-        // if cell is alive
-        // 2-3 - Survives
-        // if a dead cell has 3 neighbours - comes to life
-
-        for (int row = 0;row<size;row++){
-
-            for (int col = 0;col<size;col++){
-
-                int count = countCellsAround(row,col);
-
-                if (isAlive(row,col)){
-                    if(count == 2||count ==3){
-                        next[row][col] = true;
-                    }
-                    else{
-                        next[row][col]=false;
-                    }
-                } else{
-                    if(count == 3){
-                        next[row][col] = true;
-                    }else {
-                        next[row][col] = false;
-                    }
-                }
-
-            }
+    public void setAlive(int row, int col, boolean alive)
+    {
+        if (row >= 0 && row < size && col >= 0 && col < size)
+        {
+            board[row][col] = alive;
         }
+    }
 
-        boolean[][] temp;
-        temp = board;
-        board = next;
-        next = temp;
-
+    public boolean isAlive(int row, int col)
+    {
+        if (row >= 0 && row < size && col >= 0 && col < size)
+        {
+            return board[row][col]; 
+        }
+        else
+        {
+            return false;
+        }
     }
 
     public void render()
