@@ -12,6 +12,12 @@ public class StarMap extends PApplet {
     
     void drawGrid()
     {
+        int c = height/2;
+        //int m = map(0, c, frameRat, frameRate, frameRate);
+        background(0);
+        stroke(255);
+       // for(int i = 0;i <  )
+        //line(x,y,x,y);
     }
 
     void printStars()
@@ -39,6 +45,8 @@ public class StarMap extends PApplet {
 
     public void mouseClicked()
     {
+
+       
         
     }
 
