@@ -84,7 +84,7 @@ public class Main
     public static void main(String[] args)
     {
         starMap();
-
+        //loops();
         // Tara Misty
         // Tara Tara
         

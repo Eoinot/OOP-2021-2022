@@ -11,23 +11,21 @@ public class StarMap extends PApplet {
     ArrayList<Star> stars = new ArrayList<Star>();
     public float border;
     
+
     void drawGrid()
     {
-        int c = height/2;
-        //int m = map(0, c, frameRat, frameRate, frameRate);
-        background(0);
-        stroke(255,0,255);
-        textSize(17);
-        for(int i = -5;i <= 5;i++ ){
-            float x = map(i,-5,5,border,width-border);
-            line(x,border,x,height - border);
-            line(border,x,width - border,x);
+        stroke(255, 0, 255);
+        textAlign(CENTER, CENTER);
+        textSize(20);
+        for(int i = -5; i <=5; i ++)
+        {
+            float x = map(i, -5, 5, border, width - border);
+            line(x, border, x, height - border);
+            line(border, x, width - border, x);
             fill(255);
-
-            text(i,x,border*0.5f);
-            text(i,border*0.5f,x);
+            text(i, x, border * 0.5f);
+            text(i, border * 0.5f, x);
         }
-        
     }
 
     void printStars()
@@ -52,12 +50,46 @@ public class StarMap extends PApplet {
         size(800, 800);
     }
 
+    Star first = null;
+    Star second = null;
+
+    int firstclickedStar = -1;
 
     public void mouseClicked()
     {
+     /*    float x = mouseX;
+        float y = mouseY; 
 
-       
-        
+        System.out.println(x);
+        System.out.println(y);
+
+        stroke(255, 255, 0);
+        line(pmouseX,pmouseY,mouseX,mouseY); 
+        mousePressed(); */
+        for(Star s: stars)
+        {
+            float x = map(s.getxG(),-5,5,border,width-border);
+            float y = map(s.getyG(),-5,5,border,width-border);
+
+            if(dist(mouseX,mouseY,x,y) < s.getAbsMag())
+            {
+                if(first == null)
+                {
+                    first = s;
+                    break;
+                }else if(second == null)
+                {
+                    second = s;
+                    break;
+                }else{
+                    first = s;
+                    second = null;
+                    break;
+                }
+            }
+        }
+
+            
     }
 
     public void setup() {
@@ -69,13 +101,10 @@ public class StarMap extends PApplet {
 
     public void drawStars()
     {
-        
-        for(Star s:stars){
-
+        for(Star s:stars)
+        {
             s.render(this);
         }
-       
-
     }
 
     public void draw() 
@@ -83,6 +112,34 @@ public class StarMap extends PApplet {
         background(0);
         drawGrid();
         drawStars();
+        if(first != null)
+        {
+            float x = map(first.getxG(),-5,5,border,width-border);
+            float y = map(first.getyG(),-5,5,border,width-border);
+            if(second != null)
+            {
+                float x2 = map(second.getxG(),-5,5,border,width-border);
+                float y2= map(second.getyG(),-5,5,border,width-border);
+                
+                stroke(255,255,0);
+                line(x,y,x2,y2);
 
+                float dist = dist(first.getxG(),first.getyG(),first.getzG(),second.getxG(),second.getyG(),second.getzG());
+
+                fill(255);
+                textAlign(CENTER,CENTER);
+                text("Distance between: " + first.getDisplayName() + " and " + second.getDisplayName() + " is" + dist + " parsecs",width/2,height-(border*0.5f));
+                
+
+            }
+            else{
+                stroke(255,255,0);
+                line(x,y,mouseX,mouseY);
+                
+            }
+               
+
+
+        }
     }
 }
